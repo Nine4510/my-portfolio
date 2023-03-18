@@ -6,4 +6,6 @@ export interface User {
     subtitle?: string,
     avatar?: string,
     socials?: Social[],
+    profilePict?: string,
+    profileUrl?: string,
 }
