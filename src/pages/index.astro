@@ -1,12 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
-import UserProfile from '../components/UserProfile.astro';
+import { UserProfile } from '../components/UserProfile.jsx';
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="My Profile">
 	<main>
 		<div class=""></div>
-		<UserProfile></UserProfile>
+		<UserProfile client:load></UserProfile>
 	</main>
 </Layout>
