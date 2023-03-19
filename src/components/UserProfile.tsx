@@ -14,43 +14,43 @@ export function UserProfile() {
     const [chipData, setChipData] = createSignal<Chip[]>([]);
     
     onMount(async () => {
-        // const current = await getUser();
-        // if (current.profilePict) current.profileUrl = await getImage(current.profilePict);
-        // if (current.socials) current.socials = await Promise.all(
-        //     current.socials.map(async e => {
-        //         var temp = e
-        //         if (e.icon) temp.iconLink = await getImage(e.icon);
-        //         return temp;
-        //     })
-        // );
-        // const tempChips : Chip[] = current.socials!!.map(e => (
-        //         {
-        //             icon: e.iconLink, 
-        //             iconAlt: e.alt, 
-        //             content: e.name, 
-        //             action: (
-        //                     <a href={e.link}  target='_blank'>
-        //                         <i class='fas fa-regular fa-arrow-up-right-from-square'></i>
-        //                     </a>
-        //                 )
-        //         } as Chip)
-        //     );
-        // setChipData(tempChips)
-        // setUser({data: current, isInitialized: true});
+        const current = await getUser();
+        if (current.profilePict) current.profileUrl = await getImage(current.profilePict);
+        if (current.socials) current.socials = await Promise.all(
+            current.socials.map(async e => {
+                var temp = e
+                if (e.icon) temp.iconLink = await getImage(e.icon);
+                return temp;
+            })
+        );
+        const tempChips : Chip[] = current.socials!!.map(e => (
+                {
+                    icon: e.iconLink, 
+                    iconAlt: e.alt, 
+                    content: e.name, 
+                    action: (
+                            <a href={e.link}  target='_blank'>
+                                <i class='fas fa-regular fa-arrow-up-right-from-square'></i>
+                            </a>
+                        )
+                } as Chip)
+            );
+        setChipData(tempChips)
+        setUser({data: current, isInitialized: true});
     });
 
     return (
         <div class='p-4 w-full'>
             <div class="pb-2">
                 <Show when={ user().isInitialized } fallback={ shimmer('h-10', 'w-72') }>
-                    <div class="text-lg font-bold text-white">
+                    <div class="text-4xl font-bold text-white">
                         Hi I'm { user().data.name }
                     </div>
                 </Show>
             </div>
             <div class="pb-2">
                 <Show when={ user().isInitialized } fallback={ shimmer('h-9', 'w-80') }>
-                    <div class="text-md font-bold text-white">
+                    <div class="text-2xl font-bold text-white">
                         { user().data.subtitle }
                     </div>
                 </Show>
@@ -62,7 +62,7 @@ export function UserProfile() {
                     </div>
                 </Show>
             </div>
-            <div class='flex flex-row'>
+            <div class='flex flex-row mt-2'>
                 <div class="flex-none mr-4">
                     <Show when={ user().isInitialized }  fallback={ avatarShimmer('md:w-32 w-24', 'md:h-32 h-24') }>
                         <div class="text-sm text-white flex-wrap">
@@ -70,7 +70,7 @@ export function UserProfile() {
                         </div>
                     </Show>
                 </div>
-                <div class="flex-1">
+                <div class="flex flex-1 place-items-center">
                     <Show when={ user().isInitialized } fallback={ shimmerLoad('h-full', true) }>
                         { chips(chipData()) }
                     </Show>

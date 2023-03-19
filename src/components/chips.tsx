@@ -46,7 +46,7 @@ export function shimmerLoad(height? : string, isList? : boolean){
 
 export function chips(children : Chip[]) {
     return ( 
-        <div class="flex flex-wrap self-center gap-1">
+        <div class="flex flex-wrap gap-1">
             <For each={children}>{(children) => chip(children)}</For>
         </div>
     );
