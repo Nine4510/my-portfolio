@@ -1,5 +1,7 @@
 export interface Social {
-    icon: String,
-    name: String,
-    link: String,
+    icon?: string,
+    name?: string,
+    link?: string,
+    iconLink?: string,
+    alt?: string,
 }

@@ -1,11 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { UserProfile } from '../components/UserProfile.jsx';
+import { UserProfile } from '../components/userProfile.jsx';
 ---
 
 <Layout title="My Profile">
 	<main>
-		<div class=""></div>
-		<UserProfile client:load></UserProfile>
+		<div class="flex">
+			<div class="flex md:flex-row">
+				<UserProfile client:load></UserProfile>
+			</div>
+		</div>
 	</main>
 </Layout>
