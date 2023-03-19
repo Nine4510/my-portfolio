@@ -19,10 +19,35 @@ export function chip(chip : Chip){
     );
 }
 
+export function shimmerLoad(height? : string, isList? : boolean){
+    const chip = 
+        (
+            <div class={`${ isList ? 'bg-white' : 'bg-gray-300' } animate-pulse rounded-full h-10 w-24`}>
+                <div class={`bg-gradient-to-r ${isList? 'from-white' : 'from-gray-300'} ${isList? 'to-slate-200' : 'to-gray-400'} h-full rounded-full`}></div>
+            </div>
+        );
+    
+    const chips = Array(5).fill(chip);
+    
+    if (isList) {
+        return (
+            <div class={`bg-gray-300 animate-pulse rounded-md ${ height ? height : 'h-20' } w-full`}>
+                <div class="flex flex-wrap bg-gradient-to-r from-gray-300 to-gray-400 h-full rounded-md p-1 ">
+                    <div class="flex flex-wrap h-min gap-1">
+                        <For each={ chips }>{ chips => chips }</For>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    return chip;
+}
+
 export function chips(children : Chip[]) {
     return ( 
         <div class="flex flex-wrap self-center gap-1">
             <For each={children}>{(children) => chip(children)}</For>
         </div>
-    )
+    );
 }
