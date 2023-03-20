@@ -64,9 +64,9 @@ export function UserProfile() {
             </div>
             <div class='flex flex-row mt-2'>
                 <div class="flex-none mr-4">
-                    <Show when={ user().isInitialized }  fallback={ avatarShimmer('md:w-32 w-24', 'md:h-32 h-24') }>
+                    <Show when={ user().isInitialized }  fallback={ avatarShimmer('w-28', 'h-28') }>
                         <div class="text-sm text-white flex-wrap">
-                            { avatar('md:w-32 w-24', 'md:h-32 h-24', user().data.profileUrl) }
+                            { avatar('w-28', 'h-28', user().data.profileUrl) }
                         </div>
                     </Show>
                 </div>

@@ -7,7 +7,17 @@ import { UserProfile } from '../components/userProfile.jsx';
 	<main>
 		<div class="flex">
 			<div class="flex md:flex-row md:w-1/2">
-				<UserProfile client:load></UserProfile>
+				<div class="flex flex-col">
+					<UserProfile client:load></UserProfile>
+					<ul class="ml-20 mt-10">
+						<li class="text-white font-bold text-xl hover:text-blue-400 hover:text-2xl">
+							<a href="">Skill</a>
+						</li>
+						<li class="text-white font-bold text-xl hover:text-blue-400 hover:text-2xl" >
+							<a href="">Project</a>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</main>
