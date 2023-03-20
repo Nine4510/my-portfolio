@@ -1,4 +1,4 @@
-import { collection, limit, query, getDoc, getDocs } from "firebase/firestore"
+import { collection, limit, query, getDocs } from "firebase/firestore"
 import { firestore } from "../firebase"
 import type { User } from "../models/user"
 

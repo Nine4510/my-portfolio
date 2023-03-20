@@ -40,7 +40,7 @@ export function UserProfile() {
     });
 
     return (
-        <div class='p-4 w-full'>
+        <div class='w-full'>
             <div class="pb-2">
                 <Show when={ user().isInitialized } fallback={ shimmer('h-10', 'w-72') }>
                     <div class="text-4xl font-bold text-white">

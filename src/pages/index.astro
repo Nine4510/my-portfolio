@@ -1,24 +1,35 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { UserProfile } from '../components/userProfile.jsx';
+import { SkillView } from "../components/skill.jsx";
 ---
 
 <Layout title="Profile | Zulkarnain Miranda">
 	<main>
-		<div class="flex">
-			<div class="flex md:flex-row md:w-1/2">
+		<div class="flex flex-col md:flex-row h-screen p-4">
+			<div class="flex flex-col md:w-1/2">
+				<UserProfile client:load></UserProfile>
+				<ul class="ml-20 mt-10 hidden">
+					<li class="text-white font-bold text-xl hover:text-blue-400 hover:text-2xl">
+						<a href="">Skill</a>
+					</li>
+					<li class="text-white font-bold text-xl hover:text-blue-400 hover:text-2xl" >
+						<a href="">Project</a>
+					</li>
+				</ul>
+			</div>
+			<div class="flex-1">
 				<div class="flex flex-col">
-					<UserProfile client:load></UserProfile>
-					<ul class="ml-20 mt-10">
-						<li class="text-white font-bold text-xl hover:text-blue-400 hover:text-2xl">
-							<a href="">Skill</a>
-						</li>
-						<li class="text-white font-bold text-xl hover:text-blue-400 hover:text-2xl" >
-							<a href="">Project</a>
-						</li>
-					</ul>
+					<div class="text-white font-bold text-2xl" id="skill">
+						Skill
+					</div>
+					<div class="">
+						<SkillView client:visible></SkillView>
+					</div>
 				</div>
 			</div>
+			
 		</div>
+		
 	</main>
 </Layout>
