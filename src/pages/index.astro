@@ -7,9 +7,9 @@ import { SkillView } from "../components/skill.jsx";
 <Layout title="Profile | Zulkarnain Miranda">
 	<main>
 		<div class="flex flex-col md:flex-row h-screen p-4">
-			<div class="flex flex-col md:w-1/2">
+			<div class="flex flex-col md:w-1/2 rounded-md border-2 border-slate-500 bg-slate-900 p-4 h-min">
 				<UserProfile client:load></UserProfile>
-				<ul class="ml-20 mt-10 hidden">
+				<ul class="ml-20 mt-10 sm:hidden">
 					<li class="text-white font-bold text-xl hover:text-blue-400 hover:text-2xl">
 						<a href="">Skill</a>
 					</li>
@@ -18,13 +18,16 @@ import { SkillView } from "../components/skill.jsx";
 					</li>
 				</ul>
 			</div>
-			<div class="flex-1">
-				<div class="flex flex-col">
+			<div class="flex-1 pl-5 ">
+				<div class="flex flex-col overflow-y-auto scrollbar-hide">
 					<div class="text-white font-bold text-2xl" id="skill">
 						Skill
 					</div>
 					<div class="">
 						<SkillView client:visible></SkillView>
+					</div>
+					<div class="text-white font-bold text-2xl" id="project">
+						Project
 					</div>
 				</div>
 			</div>

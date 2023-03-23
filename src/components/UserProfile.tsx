@@ -16,14 +16,8 @@ export function UserProfile() {
     onMount(async () => {
         const current = await getUser();
         if (current.profilePict) current.profileUrl = await getImage(current.profilePict);
-        if (current.socials) current.socials = await Promise.all(
-            current.socials.map(async e => {
-                var temp = e
-                if (e.icon) temp.iconLink = await getImage(e.icon);
-                return temp;
-            })
-        );
-        const tempChips : Chip[] = current.socials!!.map(e => (
+        const tempChips : Chip[] = current.socials!!.map(
+            e => (
                 {
                     icon: e.iconLink, 
                     iconAlt: e.alt, 
