@@ -1,21 +1,18 @@
-import { createSignal, For, onMount } from "solid-js";
+import { createResource, createSignal, For, onMount } from "solid-js";
 import type { Skill } from "../models/skill";
-import { getAll } from "../services/skillService";
+import { getAllSkill } from "../services/skillService";
 import { avatar } from "./circularAvatar";
 import { chips } from "../components/chips";
 
 export function SkillView() {
-    const [data, setData] = 
-        createSignal<{isInitialized: boolean, data: Skill[]}>({isInitialized: false, data: []});
-    
-    onMount(async () => {
-        let result = await getAll()
-        setData({isInitialized: true, data: result});
-    });
+    const [data] = createResource<Skill[]>(() => getAllSkill())
 
     return (
-        <div class="flex flex-col w-full h-min p-2">
-            <For each={ data().data }>
+        <div class="flex flex-col w-full h-min">
+            <div class="text-white font-bold text-2xl" id="skill">
+                Skill
+            </div>
+            <For each={ data() }>
             { 
                 data => (
                     <div class="flex flex-row gap-4 rounded-md border-2 border-slate-500 bg-slate-900 mb-2 p-2 h-min w-full">

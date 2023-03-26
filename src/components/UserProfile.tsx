@@ -1,7 +1,6 @@
-import { createSignal, onMount, Show } from 'solid-js'
+import { createMemo, createResource, Show} from 'solid-js'
 import { getUser } from "../services/userService";
 import { avatar, avatarShimmer } from './circularAvatar';
-import { getImage } from "../services/storageService";
 import { shimmer } from "./shimmer";
 import { chips, shimmerLoad } from './chips';
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -9,64 +8,63 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import type { User } from "../models/user";
 import type { Chip } from "../models/pojo/chip"
 
-export function UserProfile() {
-    const [user, setUser] = createSignal<{data: User, isInitialized: boolean}>({data: {}, isInitialized: false});
-    const [chipData, setChipData] = createSignal<Chip[]>([]);
-    
-    onMount(async () => {
-        const current = await getUser();
-        if (current.profilePict) current.profileUrl = await getImage(current.profilePict);
-        const tempChips : Chip[] = current.socials!!.map(
-            e => (
-                {
-                    icon: e.iconLink, 
+export  function UserProfile() {
+    const [user] = createResource<User>(() => getUser());
+    const chip = createMemo<Chip[]>(() => {
+        let result : Chip[] = [];
+
+        if (user()) {
+            result = user()!.socials!.map(
+                e => ({
+                    icon: e.iconLink,
                     iconAlt: e.alt, 
                     content: e.name, 
                     action: (
-                            <a href={e.link}  target='_blank'>
-                                <i class='fas fa-regular fa-arrow-up-right-from-square'></i>
-                            </a>
-                        )
+                                <a href={e.link}  target='_blank'>
+                                    <i class='fas fa-regular fa-arrow-up-right-from-square'></i>
+                                </a>
+                            )
                 } as Chip)
-            );
-        setChipData(tempChips)
-        setUser({data: current, isInitialized: true});
-    });
+            )
+        }
+
+        return result;
+    })
 
     return (
         <div class='w-full'>
             <div class="pb-2">
-                <Show when={ user().isInitialized } fallback={ shimmer('h-10', 'w-72') }>
+                <Show when={ user() } fallback={ shimmer('h-10', 'w-72') }>
                     <div class="text-4xl font-bold text-white">
-                        Hi I'm { user().data.name }
+                        Hi I'm { user()?.name }
                     </div>
                 </Show>
             </div>
             <div class="pb-2">
-                <Show when={ user().isInitialized } fallback={ shimmer('h-9', 'w-80') }>
+                <Show when={ user() } fallback={ shimmer('h-9', 'w-80') }>
                     <div class="text-2xl font-bold text-white">
-                        { user().data.subtitle }
+                        { user()?.subtitle }
                     </div>
                 </Show>
             </div>
             <div class="pb-2">
-                <Show when={ user().isInitialized } fallback={ shimmer('h-20', 'w-full') }>
+                <Show when={ user() } fallback={ shimmer('h-20', 'w-full') }>
                     <div class="text-sm text-white flex-wrap">
-                        { user().data.aboutMe }
+                        { user()?.aboutMe }
                     </div>
                 </Show>
             </div>
             <div class='flex flex-row mt-2'>
                 <div class="flex-none mr-4">
-                    <Show when={ user().isInitialized }  fallback={ avatarShimmer('w-28', 'h-28') }>
+                    <Show when={ user() }  fallback={ avatarShimmer('w-28', 'h-28') }>
                         <div class="text-sm text-white flex-wrap">
-                            { avatar('w-28', 'h-28', user().data.profileUrl) }
+                            { avatar('w-28', 'h-28', user()?.profileUrl) }
                         </div>
                     </Show>
                 </div>
                 <div class="flex flex-1 place-items-center">
-                    <Show when={ user().isInitialized } fallback={ shimmerLoad('h-full', true) }>
-                        { chips(chipData()) }
+                    <Show when={ user() } fallback={ shimmerLoad('h-full', true) } >
+                        { chips(chip()) }
                     </Show>
                 </div>
             </div>
