@@ -13,7 +13,7 @@ export function Project(){
 
     return (
         <div class="flex flex-col w-full h-min">
-            <div class="text-white font-bold text-2xl" id="project">
+            <div class="text-white font-bold text-2xl mb-1" id="project">
                 Project
             </div>
             <For each={ data() }>

@@ -9,7 +9,7 @@ export function SkillView() {
 
     return (
         <div class="flex flex-col w-full h-min">
-            <div class="text-white font-bold text-2xl" id="skill">
+            <div class="text-white font-bold text-2xl mb-1" id="skill">
                 Skill
             </div>
             <For each={ data() }>
