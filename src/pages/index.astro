@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { UserProfile } from '../components/userProfile.jsx';
 import { SkillView } from "../components/skill.jsx";
-import { Project } from '../components/project';
+import { ProjectView } from '../components/project';
 ---
 
 <Layout title="Profile | Zulkarnain Miranda">
@@ -12,17 +12,17 @@ import { Project } from '../components/project';
 				<UserProfile client:load></UserProfile>
 				<ul class="ml-20 mt-10 lg:hidden">
 					<li class="text-white font-bold text-xl hover:text-blue-400 hover:text-2xl">
-						<a href="">Skill</a>
+						<a href="#skill">Skill</a>
 					</li>
 					<li class="text-white font-bold text-xl hover:text-blue-400 hover:text-2xl" >
-						<a href="">Project</a>
+						<a href="#project">Project</a>
 					</li>
 				</ul>
 			</div>
 			<div class="flex-1 mt-4 md:mt-0 md:ml-5">
 				<div class="flex flex-col overflow-y-auto sm:overflow-hidden h-min gap-2">
 					<SkillView client:visible></SkillView>
-					<Project client:visible></Project>
+					<ProjectView client:visible></ProjectView>
 				</div>
 			</div>
 			

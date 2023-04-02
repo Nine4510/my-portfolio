@@ -8,7 +8,7 @@ function shimmer(){
     )
 }
 
-export function Project(){
+export function ProjectView(){
     const [data] = createResource<Project[]>(() => getAllProject());
     const intl = Intl.DateTimeFormat("en", { month: "long" , year: "numeric" });
 
@@ -26,7 +26,7 @@ export function Project(){
                             <span class="text-md text-slate-300">
                                 { `${ intl.format(data.startDate?.toDate()) } - ${ intl.format(data.endDate?.toDate()) }` }
                             </span>
-                            <div class="flex flex-wrap gap-2 my-4">
+                            <div class="flex flex-wrap gap-2 my-2">
                                 <For each={ data.type }>
                                     {
                                         e => (
@@ -76,9 +76,11 @@ export function Project(){
                                     }
                                 </For>
                             </div>
-                            <div class="text-md">{ data.details }</div>
+                            <div class="text-md mb-2 indent-4">{ data.details }</div>
                             <Show when={ data.demo }>
-                                <a href={ data.demo }></a>
+                                <a class="py-2 px-5 hover:bg-blue-500 bg-sky-800 border-2 border-blue-500 w-max font-bold text-sm self-end rounded-md" href={ data.demo } target="_blank">
+                                    Live App
+                                </a>
                             </Show>
                         </div>
                     )

@@ -41,7 +41,7 @@ export function SkillView() {
                 { 
                     data => (
                         <div class="flex flex-row gap-4 rounded-md border-2 border-slate-500 bg-slate-900 mb-2 p-2 h-min w-full">
-                            <div class="flex-none rounded-full aspect-square h-16 p-3 bg-white">
+                            <div class="flex-none rounded-full aspect-square h-16 p-3 bg-white place-self-center">
                                 <img class="h-full w-full object-scale-down" src={ data.iconUrl } alt={ data.name } />
                             </div>
                             <div class="flex flex-1 flex-col text-white gap-2">
@@ -53,7 +53,6 @@ export function SkillView() {
                                         )) 
                                     }
                                 </div>
-                                <span class="flex flex-wrap flex-1">{ data.description }</span>
                             </div>
                         </div>
                     )
