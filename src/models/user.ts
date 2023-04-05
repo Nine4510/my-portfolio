@@ -1,6 +1,6 @@
 import type { Social } from "./social";
 
-export interface User {
+export interface MyUser {
     name?: string;
     aboutMe?: string,
     subtitle?: string,

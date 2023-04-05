@@ -1,15 +1,10 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
-import type { UserCredential } from "firebase/auth"
+import { signInWithEmailAndPassword, User } from "firebase/auth";
 import { auth } from "../firebase";
+import type { FirebaseError } from "firebase/app";
 
-export let user : UserCredential | null = null;
-
-export async function login(username: string, password: string) : Promise<UserCredential | null> {
-    try {
-        user = await signInWithEmailAndPassword(auth, username, password);
-        return user;
-    } 
-    catch(error) {
-        return null;
-    }
+export async function login(username: string, password: string) : Promise<void> {
+    await signInWithEmailAndPassword(auth, username, password)
+        .catch(error => { 
+            console.error(error);
+        });
 }

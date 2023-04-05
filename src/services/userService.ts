@@ -1,12 +1,12 @@
 import { collection, limit, query, getDocs } from "firebase/firestore"
 import { firestore } from "../firebase"
-import type { User } from "../models/user"
+import type { MyUser } from "../models/user"
 import { getImage } from "./storageService";
 
 const colName = 'user'
 const ref = collection(firestore, colName);
 
-export async function getUser() : Promise<User> {
+export async function getUser() : Promise<MyUser> {
     const dataQuery = query(ref, limit(1));
 
     return await getDocs(dataQuery).then(async (e) => {
@@ -14,7 +14,7 @@ export async function getUser() : Promise<User> {
             alert("Data not found");
             return {};
         }
-        const result = e.docs[0].data() as User;
+        const result = e.docs[0].data() as MyUser;
         result.profileUrl = await getImage(result.profilePict);
         if (result.socials){
             result.socials = await Promise.all(

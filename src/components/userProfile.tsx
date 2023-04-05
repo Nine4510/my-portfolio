@@ -5,11 +5,11 @@ import { shimmer } from "./shimmer";
 import { chips, shimmerLoad } from './chips';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
-import type { User } from "../models/user";
+import type { MyUser } from "../models/user";
 import type { Chip } from "../models/pojo/chip"
 
 export  function UserProfile() {
-    const [user] = createResource<User>(() => getUser());
+    const [user] = createResource<MyUser>(() => getUser());
     const chip = createMemo<Chip[]>(() => {
         let result : Chip[] = [];
 
